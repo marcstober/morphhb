@@ -162,9 +162,17 @@ section#work div#popup ul
 	padding: 0;
 	text-align: center;
 }
-section#work div#popup ul li.lemma
+section#work div#popup ul li.lemma, section#work div#popup ul li.lemma a
 {
 	color: #b22234;
+}
+section#work div#popup ul li.lemma a
+{
+    text-decoration: none;
+}
+section#work div#popup ul li.lemma a:hover
+{
+    text-decoration: underline;
 }
 section#work div#popup ul li.morph
 {

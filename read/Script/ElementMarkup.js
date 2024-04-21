@@ -7,6 +7,7 @@ elementMarkup = function() {
 	popup = window.popup;
 	clickWord = window.clickWord,
 	accentInterpretation = window.accentInterpretation;
+	var timeoutID;
 	// Sets up a span element.
 	function spanElement(className) {
 		var span = document.createElement('span');
@@ -100,9 +101,19 @@ elementMarkup = function() {
 				// Bypass the closure.
 				(function(thisData) {
 					data[i].node.onmouseover = function() {
+						// console.log("clearing timeout " + t + "...");
+						clearTimeout(timeoutID);
 						popup.show(thisData);
 					};
-					data[i].node.onmouseout = popup.hide;
+					data[i].node.onmouseout = function() {
+						timeoutID = setTimeout(function() {
+							if (popup.isMouseOver()) {
+								return;
+							}
+							popup.hide();
+						}, 100);
+						// console.log("set timeout " + t);
+					};
 					data[i].node.onclick = function() {
 						clickWord.show(thisData);
 					}

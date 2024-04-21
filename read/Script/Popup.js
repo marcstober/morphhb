@@ -22,8 +22,12 @@ popup = function() {
     }
 	// Shows the popup.
 	function showPopup(data) {
+		// var url = "https://openscriptures.github.io/HebrewLexicon/HomeFiles/Lexicon.html"
+		// TODO: configuration
+		var url = "https://marcstober.github.io/HebrewLexicon/HomeFiles/Lexicon.html"
+		url += "?lexID=" + data.lemma.replace(" ", "");
 		var markup = "<ul>";
-		markup += "<li class='lemma'>" + data.lemma + "</li>";
+		markup += "<li class='lemma'><a href='" + url + "'>" + data.lemma + "</a></li>";
 		markup += "<li class='morph'>" + data.morph + "</li>";
 		markup += "<li class='accent'>" + accentInterpretation.interpret(data.accents, data.form, data.accentType) + "</li>";
 		markup += "</ul>";
@@ -37,12 +41,22 @@ popup = function() {
 	function hidePopup() {
 		pop.style.display = 'none';
 	}
+	isMouseOver = false;
+	pop.onmouseover = function() {
+		isMouseOver = true;
+	};
+	pop.onmouseout = function() {
+		isMouseOver = false;
+	};
 	return {
 		show: function(data) {
 			showPopup(data);
 		},
 		hide: function() {
 			hidePopup();
+		},
+		isMouseOver: function() {
+			return isMouseOver;
 		}
 	};
 }();
