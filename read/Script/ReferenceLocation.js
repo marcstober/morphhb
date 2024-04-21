@@ -38,9 +38,15 @@ refLocation = function() {
 		if (results) {parts.verse = parseInt(results[1]);}
 		return parts;
 	}
+	function getLink() {
+		// works even if file hosted in "subfolder"
+		var url = window.location.href
+		var prefix = url.substring(0, url.indexOf("/read"));
+		return prefix + "/read/index.html";
+	}
 	// Apply the results.
 	var ref = parseURL(),
-		homePage = window.location.protocol + "//" + window.location.host + "/read/index.html";
+		homePage = getLink();
 	book[sblNames.indexOf(ref.book)].selected = "selected";
 	// Return the public interface.
 	return {
